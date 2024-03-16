@@ -85,7 +85,7 @@
 - Adiciona a biblioteca pandas como uma dependência do projeto.
 <br>
 
-- git add .
+- git add . ou git add nomearquivo 
 - Adiciona todas as mudanças ao índice do Git.
 <br>
 
