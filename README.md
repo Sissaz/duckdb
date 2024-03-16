@@ -1,15 +1,15 @@
-# No Powershell
+### No Powershell
 - Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 - Altera a política de execução do PowerShell para permitir a execução de scripts.
 
 - Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
 - Baixa e executa o script de instalação do pyenv para Windows.
 
-# No Bash
+### No Bash
 - code .
 - Abre o Visual Studio Code na pasta atual.
 
-# No VSCode
+### No VSCode
 - curl -sSL https://install.python-poetry.org | python3 -
 - Instala o Poetry usando o script oficial.
 
@@ -70,7 +70,7 @@
 - git push origin master
 - Envia os commits para o repositório remoto na branch master.
 
-# Alguns comandos não utilizados com poetry
+### Alguns comandos não utilizados com poetry
 - pip list
 - Lista todas as bibliotecas instaladas.
 
