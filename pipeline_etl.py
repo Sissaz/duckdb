@@ -42,7 +42,7 @@ def ler_csv(caminho_arquivo):
     return dataframe
 
 if __name__ == "__main__":
-    url_pasta = 'https://drive.google.com/drive/folders/1a03IPv2_lwqf5dh0650XQZNuyQ1RbpEH'
+    url_pasta = 'xxxxxxxxxxxx'
     diretorio_local = './pasta_gdown'
     # download_arquivos_gdrive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
