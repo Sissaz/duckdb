@@ -11,13 +11,14 @@ from dotenv import load_dotenv
 from duckdb import DuckDBPyRelation
 from pandas import DataFrame
 
+# Função para baixar arquivos do Google Drive para um diretório local
 def download_arquivos_gdrive(url_pasta, diretorio_local):
     print("Iniciando download dos arquivos do Google Drive...")
     os.makedirs(diretorio_local, exist_ok=True)
     gdown.download_folder(url_pasta, output=diretorio_local, quiet=False, use_cookies=False)
     print("Download concluído.")
 
-# Função para listar arquivos CSV no diretorio especificado
+# Função para listar arquivos CSV em um diretório
 def listar_arquivos_csv(diretorio):
     print("Listando arquivos CSV no diretório...")
     arquivos_csv = []
@@ -29,6 +30,7 @@ def listar_arquivos_csv(diretorio):
     print("Listagem concluída.")
     return arquivos_csv
 
+# Função para converter arquivos CSV para UTF-8
 def converter_arquivos_para_utf8(diretorio):
     arquivos_csv = [arquivo for arquivo in os.listdir(diretorio) if arquivo.endswith('.csv') and not arquivo.endswith('_utf8.csv')]
     for arquivo in tqdm(arquivos_csv, desc="Convertendo arquivos para UTF-8"):  # Adiciona a barra de progresso
@@ -40,7 +42,7 @@ def converter_arquivos_para_utf8(diretorio):
         df = pd.read_csv(caminho_arquivo_origem, sep=';', encoding='ISO-8859-1', on_bad_lines='skip')
         df.to_csv(caminho_arquivo_destino, sep=';', index=False, encoding='utf-8')
 
-# Função para ler um arquivo csv e retonar um dataframe duckdb
+# Função para ler arquivos CSV e retornar um dataframe DuckDB
 def ler_csv(caminho_arquivo):
     print("Iniciando leitura dos arquivos CSV...")
     for arquivo in caminho_arquivo:
@@ -51,7 +53,7 @@ def ler_csv(caminho_arquivo):
     print("Leitura concluída.")
     return dataframe
 
-
+# Função para juntar vários arquivos CSV em um único DataFrame
 def juntar_arquivos_csv(diretorio, arquivo_saida):
     arquivos_csv = [arquivo for arquivo in os.listdir(diretorio) if arquivo.endswith('_utf8.csv')]
     lista_dfs = []
@@ -63,18 +65,43 @@ def juntar_arquivos_csv(diretorio, arquivo_saida):
     return df_concatenado  # Retorna o DataFrame concatenado
 
 
-# Função para adicionar uma nova coluna:
+# Função para transformar um DataFrame DuckDB, adicionando uma nova coluna concatenada
 def transformar(df: DuckDBPyRelation) -> DataFrame:
-    # Executa a consulta SQL que inclui a nova coluna, operando sobre a tabela virtual
-    df_transformado = duckdb.sql("SELECT *, CONCAT(codigo_viagem, '-', numero_bilhete, '-', numero_poltrona, '-', plataforma_embarque) AS codigo FROM df").df()
-    # Remove o registro da tabela virtual para limpeza
+    # Executa a consulta SQL que inclui as novas colunas
+    df_transformado = duckdb.sql("""
+        SELECT 
+            codigo_viagem, cnpj, numero_bilhete, data_emissao_bilhete, categoria_transporte, nu_linha,
+            tipo_servico, data_viagem, hora_viagem, tipo_viagem, numero_poltrona, plataforma_embarque, origem_emissao,
+            valor_tarifa, valor_percentual_desconto, valor_aliquota_icms, valor_pedagio, valor_taxa_embarque, valor_total,                                 
+            CONCAT(codigo_viagem, '-', numero_bilhete, '-', numero_poltrona, '-', plataforma_embarque) AS codigo,
+            CONCAT(TRIM(ponto_origem_viagem), ' - ', TRIM(ponto_destino_viagem)) AS origem_destino,
+            TRIM(ponto_origem_viagem) as origem_viagem,
+            TRIM(ponto_destino_viagem) as destino_viagem,
+            CASE 
+                WHEN in_passagem_cancelada = 'NÃO' THEN 'Não' 
+                ELSE 'Sim' 
+            END AS cancelada,
+            SUBSTRING(data_viagem, 1, 5) AS dia_mes_viagem,  -- Extrai os 5 primeiros caracteres (DD-MM)
+            SUBSTRING(data_viagem, 4, 7) AS mes_viagem, -- Extrai os últimos 7 caracteres (MM-YYYY)
+            SPLIT_PART(tipo_gratitude, ' - ', 1) AS tipo_gratuidade, -- Extrai texto antes do delimitador " - "
+            CASE 
+                WHEN data_viagem = '02-11-2019' THEN 'Finados'
+                WHEN data_viagem = '15-11-2019' THEN 'Proclamação da República'
+                WHEN data_viagem = '25-12-2019' THEN 'Natal'
+                WHEN data_viagem = '01-01-2020' THEN 'Confraternização Universal'
+                ELSE 'Não é feriado'
+            END AS Feriados
+        FROM df
+    """).df()
     return df_transformado
 
 
+# Script principal
 if __name__ == "__main__":
     print("Iniciando o script...")
-    url_pasta = 'https://drive.google.com/drive/folders/1a03IPv2_lwqf5dh0650XQZNuyQ1RbpEH'
+    url_pasta = 'https://drive.google.com/drive/folders/xxxxxxxxxxxxxxxxxxxxx'
     diretorio_local = './pasta_gdown'
+    # Para fazer download dos arquivos, descomente o codigo abaixo
     # download_arquivos_gdrive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
     arquivos = listar_arquivos_csv(diretorio_local)
