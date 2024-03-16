@@ -85,6 +85,10 @@
 - Adiciona a biblioteca pandas como uma dependência do projeto.
 <br>
 
+- poetry add chardet
+- Adiciona a biblioteca chardet como uma dependência do projeto.
+<br>
+
 - git add . ou git add nomearquivo 
 - Adiciona todas as mudanças ao índice do Git.
 <br>
