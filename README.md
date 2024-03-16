@@ -8,11 +8,11 @@
 ### No Bash
 - code .
 - Abre o Visual Studio Code na pasta atual.
-
+<br>
 ### No VSCode
 - curl -sSL https://install.python-poetry.org | python3 -
 - Instala o Poetry usando o script oficial.
-
+<br>
 - poetry --version
 - Exibe a versão do Poetry instalada.
 
