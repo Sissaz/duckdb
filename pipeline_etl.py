@@ -31,15 +31,15 @@ def listar_arquivos_csv(diretorio):
     return arquivos_csv
 
 # Função para converter arquivos CSV para UTF-8
-def converter_arquivos_para_utf8(diretorio):
+def converter_arquivos_para_utf8(diretorio, max_linhas=8000):
     arquivos_csv = [arquivo for arquivo in os.listdir(diretorio) if arquivo.endswith('.csv') and not arquivo.endswith('_utf8.csv')]
-    for arquivo in tqdm(arquivos_csv, desc="Convertendo arquivos para UTF-8"):  # Adiciona a barra de progresso
+    for arquivo in tqdm(arquivos_csv, desc="Convertendo arquivos para UTF-8"):
         nome_arquivo_sem_extensao = arquivo.split('.')[0]
         caminho_arquivo_origem = os.path.join(diretorio, arquivo)
         caminho_arquivo_destino = os.path.join(diretorio, f"{nome_arquivo_sem_extensao}_utf8.csv")
         # Se necessário, altere o encoding para o do arquivo csv utilizado. 
         # Algumas opções comuns incluem: 'UTF-8', 'ISO-8859-1' (latin1), 'windows-1252', 'UTF-16', 'ASCII', 'cp1251' (windows-1251), 'gbk'.
-        df = pd.read_csv(caminho_arquivo_origem, sep=';', encoding='ISO-8859-1', on_bad_lines='skip')
+        df = pd.read_csv(caminho_arquivo_origem, sep=';', encoding='ISO-8859-1', on_bad_lines='skip', nrows=max_linhas)
         df.to_csv(caminho_arquivo_destino, sep=';', index=False, encoding='utf-8')
 
 # Função para ler arquivos CSV e retornar um dataframe DuckDB
@@ -54,15 +54,15 @@ def ler_csv(caminho_arquivo):
     return dataframe
 
 # Função para juntar vários arquivos CSV em um único DataFrame
-def juntar_arquivos_csv(diretorio, arquivo_saida):
+def juntar_arquivos_csv(diretorio, arquivo_saida, max_linhas=8000):
     arquivos_csv = [arquivo for arquivo in os.listdir(diretorio) if arquivo.endswith('_utf8.csv')]
     lista_dfs = []
     for arquivo in tqdm(arquivos_csv, desc="Juntando arquivos CSV"):
         caminho_arquivo = os.path.join(diretorio, arquivo)
-        df = pd.read_csv(caminho_arquivo, sep=';', encoding='utf-8')
+        df = pd.read_csv(caminho_arquivo, sep=';', encoding='utf-8', nrows=max_linhas)
         lista_dfs.append(df)
     df_concatenado = pd.concat(lista_dfs, ignore_index=True)
-    return df_concatenado  # Retorna o DataFrame concatenado
+    return df_concatenado # Retorna o DataFrame concatenado
 
 
 # Função para transformar um DataFrame DuckDB, adicionando uma nova coluna concatenada
@@ -72,7 +72,12 @@ def transformar(df: DuckDBPyRelation) -> DataFrame:
         SELECT 
             codigo_viagem, cnpj, numero_bilhete, data_emissao_bilhete, categoria_transporte, nu_linha,
             tipo_servico, data_viagem, hora_viagem, tipo_viagem, numero_poltrona, plataforma_embarque, origem_emissao,
-            valor_tarifa, valor_percentual_desconto, valor_aliquota_icms, valor_pedagio, valor_taxa_embarque, valor_total,                                 
+            REPLACE(CAST(valor_tarifa AS VARCHAR), '.', ',') AS valor_tarifa, 
+            REPLACE(CAST(valor_percentual_desconto AS VARCHAR), '.', ',') AS valor_percentual_desconto, 
+            REPLACE(CAST(valor_aliquota_icms AS VARCHAR), '.', ',') AS valor_aliquota_icms, 
+            REPLACE(CAST(valor_pedagio AS VARCHAR), '.', ',') AS valor_pedagio, 
+            REPLACE(CAST(valor_taxa_embarque AS VARCHAR), '.', ',') AS valor_taxa_embarque, 
+            REPLACE(CAST(valor_total AS VARCHAR), '.', ',') AS valor_total,                              
             CONCAT(codigo_viagem, '-', numero_bilhete, '-', numero_poltrona, '-', plataforma_embarque) AS codigo,
             CONCAT(TRIM(ponto_origem_viagem), ' - ', TRIM(ponto_destino_viagem)) AS origem_destino,
             TRIM(ponto_origem_viagem) as origem_viagem,
@@ -90,8 +95,9 @@ def transformar(df: DuckDBPyRelation) -> DataFrame:
                 WHEN data_viagem = '25-12-2019' THEN 'Natal'
                 WHEN data_viagem = '01-01-2020' THEN 'Confraternização Universal'
                 ELSE 'Não é feriado'
-            END AS Feriados
+            END AS feriados
         FROM df
+        WHERE valor_total < 1000  -- Adiciona a cláusula WHERE para retirar os valores discrepantes das passagens
     """).df()
     return df_transformado
 
@@ -99,16 +105,16 @@ def transformar(df: DuckDBPyRelation) -> DataFrame:
 # Script principal
 if __name__ == "__main__":
     print("Iniciando o script...")
-    url_pasta = 'https://drive.google.com/drive/folders/xxxxxxxxxxxxxxxxxxxxx'
+    url_pasta = 'https://drive.google.com/drive/folders/xxxxxxxxxxxxxxxxx'
     diretorio_local = './pasta_gdown'
     # Para fazer download dos arquivos, descomente o codigo abaixo
     # download_arquivos_gdrive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
     arquivos = listar_arquivos_csv(diretorio_local)
     ler_csv(arquivos)
-    df_concatenado = juntar_arquivos_csv(diretorio_local, 'arquivo_concatenado.csv')
+    df_concatenado = juntar_arquivos_csv(diretorio_local, 'base_viagens.csv')
     df_transformado = transformar(df_concatenado)  # Aplica a transformação ao DataFrame concatenado
-    caminho_arquivo_saida = os.path.join(diretorio_local, 'arquivo_concatenado.csv')
+    caminho_arquivo_saida = os.path.join(diretorio_local, 'base_viagens.csv')
     df_transformado.to_csv(caminho_arquivo_saida, sep=';', index=False, encoding='utf-8')  # Salva o DataFrame transformado no arquivo CSV
     print("Script concluído.")
 
