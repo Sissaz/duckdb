@@ -28,3 +28,6 @@ Consulta apenas
 - deactivate // sair do ambiente vitual
 - pip installl poetry // ambiente virtual
 - poetry config virtualenvs.in-project true
+- git add . // update no github
+- git commit -m "update" // update no github
+- git push origin master // update no github
