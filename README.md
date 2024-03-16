@@ -15,6 +15,7 @@ Poetry: Ambiente Virtual
 - poetry new base // criar nova pasta do projeto pelo poetry (opcional caso já tiver criado)
 - pyenv local 3.12.1 // versão python
 - poetry env use 3.12.1 // versão python
+- pyenv global 3.12.1
 - poetry install
 - poetry install --no-root
 - poetry add streamlit
@@ -26,16 +27,7 @@ Poetry: Ambiente Virtual
 - code . // abrir o vscode na pasta que o bash está
 
 
-
-- Começando projeto
-- pyenv install 3.12.1
-- pyenv global 3.12.1
-- pyenv --version
-- pip install django
-- pip install pandas
-- pip install streamlit
-
-- Outras configurações no Bash
+- Outras configurações no Bash (não usando com poetry)
 - pip list // listagem de bibliotecas
 - pip freeze //  versão das bibliotecas
 - pip freeze | grep -v "^-e" | xargs pip uninstall -y // desinstalar todas bibliotecas
@@ -45,7 +37,8 @@ Poetry: Ambiente Virtual
 - pip installl poetry // ambiente virtual
 - poetry config virtualenvs.in-project true
 
-  
+
+- Commitar mudanças no github
 - git add . // update no github
 - git commit -m "update" // update no github
 - git push origin master // update no github
