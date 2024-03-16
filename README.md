@@ -38,8 +38,8 @@ Poetry: Ambiente Virtual
 - poetry config virtualenvs.in-project true
 
 
-- Commitar mudanças no github
+- Commitar mudanças para o github
+- salvar o arquivo ctrl + s (quem diria)
 - git add . // update no github
 - git commit -m "update" // update no github
 - git push origin master // update no github
-xxxxxxxxxxxxxxxxxxxxxxxxxxx
