@@ -61,6 +61,10 @@
 - Adiciona a biblioteca Streamlit como uma dependência do projeto.
 <br>
 
+- poetry add gdown
+- Adiciona a biblioteca gdown como uma dependência do projeto.
+<br>
+
 - poetry add psycopg2-binary
 - Adiciona a biblioteca psycopg2-binary como uma dependência do projeto.
 <br>
