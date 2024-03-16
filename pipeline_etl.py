@@ -11,12 +11,15 @@ from dotenv import load_dotenv
 from duckdb import DuckDBPyRelation
 from pandas import DataFrame
 
+load_dotenv()
+
 # Função para baixar arquivos do Google Drive para um diretório local
 def download_arquivos_gdrive(url_pasta, diretorio_local):
     print("Iniciando download dos arquivos do Google Drive...")
     os.makedirs(diretorio_local, exist_ok=True)
     gdown.download_folder(url_pasta, output=diretorio_local, quiet=False, use_cookies=False)
     print("Download concluído.")
+
 
 # Função para listar arquivos CSV em um diretório
 def listar_arquivos_csv(diretorio):
@@ -30,6 +33,7 @@ def listar_arquivos_csv(diretorio):
     print("Listagem concluída.")
     return arquivos_csv
 
+
 # Função para converter arquivos CSV para UTF-8
 def converter_arquivos_para_utf8(diretorio, max_linhas=8000):
     arquivos_csv = [arquivo for arquivo in os.listdir(diretorio) if arquivo.endswith('.csv') and not arquivo.endswith('_utf8.csv')]
@@ -42,6 +46,7 @@ def converter_arquivos_para_utf8(diretorio, max_linhas=8000):
         df = pd.read_csv(caminho_arquivo_origem, sep=';', encoding='ISO-8859-1', on_bad_lines='skip', nrows=max_linhas)
         df.to_csv(caminho_arquivo_destino, sep=';', index=False, encoding='utf-8')
 
+
 # Função para ler arquivos CSV e retornar um dataframe DuckDB
 def ler_csv(caminho_arquivo):
     print("Iniciando leitura dos arquivos CSV...")
@@ -52,6 +57,7 @@ def ler_csv(caminho_arquivo):
             #print(dataframe)      
     print("Leitura concluída.")
     return dataframe
+
 
 # Função para juntar vários arquivos CSV em um único DataFrame
 def juntar_arquivos_csv(diretorio, arquivo_saida, max_linhas=8000):
@@ -102,12 +108,20 @@ def transformar(df: DuckDBPyRelation) -> DataFrame:
     return df_transformado
 
 
+# Função para converter o Duckdb em Pandas e salar o DataFrame no PostgreSQL
+def salvar_postgres(df_duckdb, tabela):
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    engine = create_engine(DATABASE_URL)
+    # Salvar o DataFrame no PostgreSQL
+    df_duckdb.to_sql(tabela, con=engine, if_exists='append', index=False)
+
+
 # Script principal
 if __name__ == "__main__":
     print("Iniciando o script...")
     url_pasta = 'https://drive.google.com/drive/folders/xxxxxxxxxxxxxxxxx'
     diretorio_local = './pasta_gdown'
-    # Para fazer download dos arquivos, descomente o codigo abaixo
+    # Para fazer download dos arquivos, descomente o código abaixo
     # download_arquivos_gdrive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
     arquivos = listar_arquivos_csv(diretorio_local)
@@ -116,5 +130,6 @@ if __name__ == "__main__":
     df_transformado = transformar(df_concatenado)  # Aplica a transformação ao DataFrame concatenado
     caminho_arquivo_saida = os.path.join(diretorio_local, 'base_viagens.csv')
     df_transformado.to_csv(caminho_arquivo_saida, sep=';', index=False, encoding='utf-8')  # Salva o DataFrame transformado no arquivo CSV
-    print("Script concluído.")
-
+    print("Base salva localmente.")
+    salvar_postgres(df_transformado, 'base_viagens')  # Salva o DataFrame transformado no PostgreSQL
+    print("Base salva no PostgreSQL.")
