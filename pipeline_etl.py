@@ -13,6 +13,9 @@ from pandas import DataFrame
 
 load_dotenv()
 
+# Conecta ao banco de dados DuckDB
+con = duckdb.connect(database='duckdb.db', read_only=False)
+
 # Função para baixar arquivos do Google Drive para um diretório local
 def download_arquivos_gdrive(url_pasta, diretorio_local):
     print("Iniciando download dos arquivos do Google Drive...")
@@ -104,9 +107,9 @@ def transformar(df: DuckDBPyRelation) -> DataFrame:
             REPLACE(CAST(valor_pedagio AS VARCHAR), '.', ',') AS valor_pedagio, 
             REPLACE(CAST(valor_taxa_embarque AS VARCHAR), '.', ',') AS valor_taxa_embarque, 
             REPLACE(CAST(valor_total AS VARCHAR), '.', ',') AS valor_total,                              
-            CONCAT(TRIM(ponto_origem_viagem), ' - ', TRIM(ponto_destino_viagem)) AS origem_destino,
             TRIM(ponto_origem_viagem) as origem_viagem,
             TRIM(ponto_destino_viagem) as destino_viagem,
+            CONCAT(TRIM(ponto_origem_viagem), ' - ', TRIM(ponto_destino_viagem)) AS origem_destino,
             CASE 
                 WHEN in_passagem_cancelada = 'NÃO' THEN 'Não' 
                 ELSE 'Sim' 
@@ -134,6 +137,11 @@ def salvar_postgres(df_duckdb, tabela):
     # Salvar o DataFrame no PostgreSQL
     df_duckdb.to_sql(tabela, con=engine, if_exists='append', index=False)
 
+# Função para salvar o DataFrame no DuckDB
+def salvar_duckdb(df, tabela):
+    con.execute(f"CREATE TABLE IF NOT EXISTS {tabela} AS SELECT * FROM df;")
+    con.execute(f"INSERT INTO {tabela} SELECT * FROM df;")
+
 
 # Script principal
 def pipeline():
@@ -156,6 +164,9 @@ def pipeline():
 
     salvar_postgres(df_transformado, 'base_viagens')  # Salva o DataFrame transformado no PostgreSQL
     print("Base salva no PostgreSQL.")
+
+    salvar_duckdb(df_transformado, 'base_viagens')  # Salva o DataFrame transformado no DuckDB
+    print("Base salva no DuckDB.")
 
 
 
