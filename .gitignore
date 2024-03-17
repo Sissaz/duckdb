@@ -1,4 +1,7 @@
 .env
 .venv/
 pasta_gdown/
+pasta_gdown2/
 *.csv
+teste.py
+pipeline_.py
