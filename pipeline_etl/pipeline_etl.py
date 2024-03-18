@@ -168,7 +168,7 @@ def salvar_no_postgres(df, tabela):
 # Pipeline de processamento
 def pipeline():
     url_pasta = 'https://drive.google.com/drive/folders/1a03IPv2_lwqf5dh0650XQZNuyQ1RbpEH'
-    diretorio_local = './pasta_gdown'
+    diretorio_local = './arquivos_salvos'
     # Para fazer download dos arquivos, descomente o código abaixo
     baixar_pasta_google_drive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
