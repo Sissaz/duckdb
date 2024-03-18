@@ -1,5 +1,5 @@
 import streamlit as st
-from pipeline_etl import pipeline
+from pipeline_etl.pipeline_etl import pipeline
 
 st.title('Processador de Arquivos')
 

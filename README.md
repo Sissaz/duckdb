@@ -1,39 +1,55 @@
-## Pipeline para Processamento e Armazenamento de Dados
+## Pipeline for Data Processing and Storage
 
-- Importação de bibliotecas: Importa várias bibliotecas úteis para o processamento de dados, conexão com banco de dados, manipulação de arquivos e variáveis de ambiente.
+This project represents a comprehensive pipeline for processing and storing data, in this case, transportation data. This pipeline is designed to handle various tasks including downloading data from Google Drive, converting files to the appropriate encoding and date format, processing CSV files, and finally storing the processed data in a PostgreSQL database. Additionally, the code utilizes DuckDB for efficient data manipulation and transformation. This pipeline is particularly useful for managing large datasets in a structured and automated manner, ensuring data integrity and consistency throughout the process.
 
-- Carregamento de variáveis de ambiente: Usando load_dotenv(), carrega as variáveis de ambiente do arquivo .env, que geralmente contém informações sensíveis ou específicas do ambiente, como credenciais de banco de dados.
+#### Why use DuckDB?
 
-- Conexão com o banco de dados: A função conectar_banco() cria uma conexão com o banco de dados DuckDB. Se o banco de dados não existir, ele será criado.
 
-- Inicialização da tabela: A função inicializar_tabela(con) cria uma tabela chamada historico_arquivos no banco de dados DuckDB, se ela ainda não existir.
+- **Efficient Data Processing**: DuckDB is known for its high performance in data processing, especially with large datasets. It can handle complex queries and transformations efficiently, making it suitable for the data transformation step in the pipeline.
 
-- Registro de arquivo: A função registrar_arquivo(con, nome_arquivo) insere um novo registro na tabela historico_arquivos com o nome do arquivo e o horário atual.
+- **In-Memory Computation**: DuckDB operates primarily in memory, which allows for faster data manipulation and querying. This is particularly beneficial when dealing with multiple transformations and calculations on the dataset.
 
-- Verificação de arquivos processados: A função arquivos_processados(con) retorna um conjunto com os nomes de todos os arquivos que já foram processados.
+- **Compatibility with Pandas**: DuckDB integrates well with Pandas DataFrames, which are commonly used for data manipulation in Python. This allows for a seamless transition between reading data, processing it with DuckDB, and then storing it in a database.
 
-- Verificação de codificação UTF-8: A função is_utf8(filename) verifica se um arquivo está codificado em UTF-8.
+- **Simplicity and Ease of Use**: DuckDB does not require a separate server or installation, making it easy to integrate into the existing pipeline. Its SQL-based interface is also straightforward for those familiar with SQL.
 
-- Conversão de arquivos para UTF-8: A função converter_arquivos_para_utf8(diretorio, max_linhas=5000) converte arquivos CSV no diretório especificado para a codificação UTF-8.
+- **Cost-Effective**: DuckDB is an open-source database, which makes it a cost-effective solution for data processing and analysis.
 
-- Conversão de datas: A função convert_date(date_str) converte strings de data para o formato '%Y/%m/%d'.
 
-- Conversão de datas em um arquivo CSV: A função convert_dates_in_csv_strict(file_path) aplica a conversão de datas a todas as colunas de um arquivo CSV que contenham a palavra "data".
+#### Code Explained
 
-- Processamento de pasta: A função process_folder(folder_path) processa todos os arquivos CSV em uma pasta, convertendo as datas.
+- **Importing libraries**: Imports various useful libraries for data processing, database connection, file manipulation, and environment variables.
 
-- Download de pasta do Google Drive: A função baixar_pasta_google_drive(url_pasta, diretorio_local) baixa uma pasta do Google Drive para um diretório local.
+- **Loading environment variables**: Using load_dotenv(), it loads the environment variables from the .env file, which usually contains sensitive or environment-specific information, such as database credentials.
 
-- Listagem de arquivos e tipos: A função listar_arquivos_e_tipos(diretorio) lista os arquivos em um diretório e identifica se são CSV, JSON ou Parquet.
+- **Database connection**: The function conectar_banco() creates a connection to the DuckDB database. If the database does not exist, it will be created.
 
-- Leitura de arquivo: A função ler_arquivo(caminho_do_arquivo, tipo) lê um arquivo de acordo com seu tipo e retorna um DataFrame.
+- **Table initialization**: The function inicializar_tabela(con) creates a table called historico_arquivos in the DuckDB database, if it does not already exist.
 
-- Transformação de DataFrame: A função transformar(df) aplica várias transformações a um DataFrame, incluindo a criação de novas colunas e a filtragem de registros.
+- **File registration**: The function registrar_arquivo(con, nome_arquivo) inserts a new record into the historico_arquivos table with the file name and the current time.
 
-- Salvamento no PostgreSQL: A função salvar_no_postgres(df, tabela) salva um DataFrame no PostgreSQL.
+- **Checking processed files**: The function arquivos_processados(con) returns a set with the names of all the files that have already been processed.
 
-- Pipeline de processamento: A função pipeline() orquestra todo o processo de download, conversão, leitura, transformação e salvamento dos dados.
+- **UTF-8 encoding check**: The function is_utf8(filename) checks if a file is encoded in UTF-8.
 
--Pontos de atenção identificados com o DuckDB:
-- As colunas de data devem estar no formato ISO 8601;
-- Os arquivos devem estar codificados em UTF-8;
+- **Converting files to UTF-8**: The function converter_arquivos_para_utf8(diretorio, max_linhas=5000) converts CSV files in the specified directory to UTF-8 encoding.
+
+- **Date conversion**: The function convert_date(date_str) converts date strings to the format '%Y/%m/%d'.
+
+- **Date conversion in a CSV file**: The function convert_dates_in_csv_strict(file_path) applies date conversion to all columns of a CSV file that contain the word "data".
+
+- **Folder processing**: The function process_folder(folder_path) processes all CSV files in a folder, converting the dates.
+
+- **Downloading a folder from Google Drive**: The function baixar_pasta_google_drive(url_pasta, diretorio_local) downloads a folder from Google Drive to a local directory.
+
+- **Listing files and types**: The function listar_arquivos_e_tipos(diretorio) lists the files in a directory and identifies whether they are CSV, JSON, or Parquet.
+
+- **Reading a file**: The function ler_arquivo(caminho_do_arquivo, tipo) reads a file according to its type and returns a DataFrame.
+
+- **DataFrame transformation**: The function transformar(df) applies various transformations to a DataFrame, including creating new columns and filtering records.
+
+- **Saving to PostgreSQL**: The function salvar_no_postgres(df, tabela) saves a DataFrame to PostgreSQL.
+
+- **Processing pipeline**: The function pipeline() orchestrates the entire process of downloading, converting, reading, transforming, and saving the data.
+
+- **Points of attention identified with DuckDB**: Date columns must be in ISO 8601 format and files must be encoded in UTF-8.
