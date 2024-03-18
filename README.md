@@ -1,9 +1,13 @@
 ## Pipeline for Data Processing and Storage
 
+<div align="center">
+<img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/ETL.png?raw=true" /></a>
+</div>
+
 This project represents a comprehensive pipeline for processing and storing data, in this case, transportation data. This pipeline is designed to handle various tasks including downloading data from Google Drive, converting files to the appropriate encoding and date format, processing CSV files, and finally storing the processed data in a PostgreSQL database. Additionally, the code utilizes DuckDB for efficient data manipulation and transformation. This pipeline is particularly useful for managing large datasets in a structured and automated manner, ensuring data integrity and consistency throughout the process.
 
 <div align="center">
-<img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Untitled-2024-03-15-2203.png?raw=true" /></a>
+<img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Fluxograma.png?raw=true" /></a>
 </div>
 
 #### Why use DuckDB?
@@ -20,3 +24,13 @@ This project represents a comprehensive pipeline for processing and storing data
 
 
 ##### [This code was developed with the assistance of a workshop conducted by Luciano Galvão Filho](https://www.youtube.com/live/eXXImkz-vMs?feature=shared): Thanks!
+
+
+<div align="center">
+<img width="100%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/base_viagens.png?raw=true" /></a>
+</div>
+
+
+<div align="center">
+<img width="100%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Render.png?raw=true" /></a>
+</div>
