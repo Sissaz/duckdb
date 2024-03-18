@@ -107,7 +107,7 @@ def listar_arquivos_e_tipos(diretorio):
 def ler_arquivo(caminho_do_arquivo, tipo):
     """Lê o arquivo de acordo com seu tipo e retorna um DataFrame."""
     if tipo == 'csv':
-        return duckdb.read_csv(caminho_do_arquivo)
+        return duckdb.read_csv(caminho_do_arquivo, delimiter=';', quotechar='"', escapechar='\\', header=True)
     elif tipo == 'json':
         return pd.read_json(caminho_do_arquivo)
     elif tipo == 'parquet':
@@ -169,11 +169,12 @@ def salvar_no_postgres(df, tabela):
 def pipeline():
     url_pasta = 'https://drive.google.com/drive/folders/1a03IPv2_lwqf5dh0650XQZNuyQ1RbpEH'
     diretorio_local = './pasta_gdown'
+    # Para fazer download dos arquivos, descomente o código abaixo
+    baixar_pasta_google_drive(url_pasta, diretorio_local)
     converter_arquivos_para_utf8(diretorio_local)
     process_folder(diretorio_local)
 
-    # Para fazer download dos arquivos, descomente o código abaixo
-    baixar_pasta_google_drive(url_pasta, diretorio_local)
+
     con = conectar_banco()
     inicializar_tabela(con)
     processados = arquivos_processados(con)
