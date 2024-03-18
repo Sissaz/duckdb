@@ -1,7 +1,7 @@
 ## Pipeline for Data Processing and Storage
 
 <div align="center">
-<img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/ETL.png?raw=true" /></a>
+<img width="55%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/ETL.png?raw=true" /></a>
 </div>
 
 This project represents a comprehensive pipeline for processing and storing data, in this case, transportation data. This pipeline is designed to handle various tasks including downloading data from Google Drive, converting files to the appropriate encoding and date format, processing CSV files, and finally storing the processed data in a PostgreSQL database. Additionally, the code utilizes DuckDB for efficient data manipulation and transformation. This pipeline is particularly useful for managing large datasets in a structured and automated manner, ensuring data integrity and consistency throughout the process.
