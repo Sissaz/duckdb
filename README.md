@@ -3,11 +3,10 @@
 This project represents a comprehensive pipeline for processing and storing data, in this case, transportation data. This pipeline is designed to handle various tasks including downloading data from Google Drive, converting files to the appropriate encoding and date format, processing CSV files, and finally storing the processed data in a PostgreSQL database. Additionally, the code utilizes DuckDB for efficient data manipulation and transformation. This pipeline is particularly useful for managing large datasets in a structured and automated manner, ensuring data integrity and consistency throughout the process.
 
 <div align="center">
-<img width="60%" src="https://raw.githubusercontent.com/Sissaz/duckdb/master/imagens/Untitled-2024-03-15-2203.excalidraw.svg" /></a>
+<img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Untitled-2024-03-15-2203.png?raw=true" /></a>
 </div>
 
 #### Why use DuckDB?
-
 
 - **Efficient Data Processing**: DuckDB is known for its high performance in data processing, especially with large datasets. It can handle complex queries and transformations efficiently, making it suitable for the data transformation step in the pipeline.
 
@@ -18,3 +17,6 @@ This project represents a comprehensive pipeline for processing and storing data
 - **Simplicity and Ease of Use**: DuckDB does not require a separate server or installation, making it easy to integrate into the existing pipeline. Its SQL-based interface is also straightforward for those familiar with SQL.
 
 - **Cost-Effective**: DuckDB is an open-source database, which makes it a cost-effective solution for data processing and analysis.
+
+
+##### [This code was developed with the assistance of a workshop conducted by Luciano Galvão Filho](https://www.youtube.com/live/eXXImkz-vMs?feature=shared): Thanks!
