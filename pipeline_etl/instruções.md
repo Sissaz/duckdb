@@ -1,126 +1,161 @@
-### No Powershell
+## ⚙️ | First Installations
+Commands for setting up a development environment: adjusting policies in PowerShell, installing pyenv, opening VSCode, using Poetry for dependency management and Python versions with pyenv, and Git commands for version control. Commands for pip and venv are mentioned but not used with Poetry.
+
+<br>
+
+### In PowerShell
 - Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-- Altera a política de execução do PowerShell para permitir a execução de scripts.
-<br>
 
-- Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; &"./install-pyenv-win.ps1"
-- Baixa e executa o script de instalação do pyenv para Windows.
-<br>
+Changes the execution policy of PowerShell to allow the execution of scripts.
 
-### No Bash
+- Invoke-WebRequest -UseBasicParsing -Uri "https://raw.githubusercontent.com/pyenv-win/pyenv-win/master/pyenv-win/install-pyenv-win.ps1" -OutFile "./install-pyenv-win.ps1"; & "./install-pyenv-win.ps1"
+
+Downloads and executes the pyenv installation script for Windows.
+<br><br>
+
+### In Bash
 - code .
-- Abre o Visual Studio Code na pasta atual.
-<br>
+Opens Visual Studio Code in the current folder.
+<br><br>
 
-### No VSCode
+### In VSCode
 - curl -sSL https://install.python-poetry.org | python3 -
-- Instala o Poetry usando o script oficial.
-<br>
 
+Installs Poetry using the official script.
+
+<br>
 - poetry --version
-- Exibe a versão do Poetry instalada.
-<br>
 
+Displays the installed version of Poetry.
+
+<br>
 - poetry config virtualenvs.in-project true
-- Configura o Poetry para criar ambientes virtuais dentro do projeto.
-<br>
 
+Configures Poetry to create virtual environments within the project.
+
+<br>
 - poetry install
-- Instala as dependências do projeto com base no arquivo pyproject.toml.
-<br>
 
+Installs the project dependencies based on the pyproject.toml file.
+
+<br>
 - poetry init
-- Inicia um novo projeto com Poetry, criando o arquivo pyproject.toml.
-<br>
 
+Starts a new project with Poetry, creating the pyproject.toml file.
+
+<br>
 - poetry shell
-- Ativa o ambiente virtual do projeto.
-<br>
 
+Activates the project's virtual environment.
+
+<br>
 - poetry new base
-- Cria um novo projeto Poetry chamado 'base'.
-<br>
 
+Creates a new Poetry project named 'base'.
+
+<br>
 - pyenv local 3.12.1
-- Define a versão local do Python para 3.12.1 usando pyenv.
-<br>
 
+Sets the local version of Python to 3.12.1 using pyenv.
+
+<br>
 - poetry env use 3.12.1
-- Define a versão do Python para o ambiente virtual do Poetry.
-<br>
 
+Sets the Python version for the Poetry virtual environment.
+
+<br>
 - pyenv global 3.12.1
-- Define a versão global do Python para 3.12.1 usando pyenv.
-<br>
 
+Sets the global version of Python to 3.12.1 using pyenv.
+
+<br>
 - poetry install --no-root
-- Instala as dependências do projeto sem instalar o pacote raiz.
-<br>
 
+Installs the project dependencies without installing the root package.
+
+<br>
 - poetry add streamlit
-- Adiciona a biblioteca Streamlit como uma dependência do projeto.
-<br>
 
+Adds the Streamlit library as a project dependency.
+
+<br>
 - poetry add gdown
-- Adiciona a biblioteca gdown como uma dependência do projeto.
-<br>
 
+Adds the gdown library as a project dependency.
+
+<br>
 - poetry add psycopg2-binary
-- Adiciona a biblioteca psycopg2-binary como uma dependência do projeto.
-<br>
 
+Adds the psycopg2-binary library as a project dependency.
+
+<br>
 - poetry add python-dotenv
-- Adiciona a biblioteca python-dotenv como uma dependência do projeto.
-<br>
 
+Adds the python-dotenv library as a project dependency.
+
+<br>
 - poetry add psycopg2
-- Adiciona a biblioteca psycopg2 como uma dependência do projeto.
-<br>
 
+Adds the psycopg2 library as a project dependency.
+
+<br>
 - poetry add sqlalchemy
-- Adiciona a biblioteca SQLAlchemy como uma dependência do projeto.
-<br>
 
+Adds the SQLAlchemy library as a project dependency.
+
+<br>
 - poetry add pandas
-- Adiciona a biblioteca pandas como uma dependência do projeto.
-<br>
 
+Adds the pandas library as a project dependency.
+
+<br>
 - poetry add chardet
-- Adiciona a biblioteca chardet como uma dependência do projeto.
-<br>
 
-- git add . ou git add nomearquivo 
-- Adiciona todas as mudanças ao índice do Git.
-<br>
+Adds the chardet library as a project dependency.
 
+<br>
+- git add . or git add filename
+
+Adds all changes to the Git index.
+
+<br>
 - git commit -m "update"
-- Cria um commit com a mensagem "update".
-<br>
 
+Creates a commit with the message "update".
+
+<br>
 - git push origin master
-- Envia os commits para o repositório remoto na branch master.
+
+Pushes commits to the remote repository on the master branch.
+
 <br>
 
-### Alguns comandos não utilizados com poetry
+### Some commands not used with poetry
 - pip list
-- Lista todas as bibliotecas instaladas.
-<br>
 
+Lists all installed libraries.
+
+<br>
 - pip freeze
-- Lista as versões das bibliotecas instaladas.
-<br>
 
+Lists the versions of the installed libraries.
+
+<br>
 - pip freeze | grep -v "^-e" | xargs pip uninstall -y
-- Desinstala todas as bibliotecas instaladas.
-<br>
 
+Uninstalls all installed libraries.
+
+<br>
 - python -m venv .venv
-- Cria um ambiente virtual chamado .venv.
-<br>
 
+Creates a virtual environment called .venv.
+
+<br>
 - source .venv/Scripts/activate
-- Ativa o ambiente virtual .venv.
-<br>
 
+Activates the .venv virtual environment.
+
+<br>
 - deactivate
-- Desativa o ambiente virtual atual.
+
+Deactivates the current virtual environment.
