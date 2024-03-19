@@ -1,6 +1,9 @@
-## Pipeline for Data Processing and Storage
+## 💾 |  Pipeline for Data Processing and Storage
 
-#### Code Explained
+ #### [First Installations](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/instru%C3%A7%C3%B5es.md): Commands for setting up a development environment
+ #### [Python Code](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/pipeline_etl.py): ETL Pipeline Code 
+
+ #### Code Explained:
 
 - **Importing libraries**: Imports various useful libraries for data processing, database connection, file manipulation, and environment variables.
 
