@@ -7,7 +7,7 @@
 This project represents a comprehensive pipeline for processing and storing data, in this case, transportation data. This pipeline is designed to handle various tasks including downloading data from Google Drive, converting files to the appropriate encoding and date format, processing CSV files, and finally storing the processed data in a PostgreSQL database. Additionally, the code utilizes DuckDB for data manipulation and transformation.
 
  #### [First Installations](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/instru%C3%A7%C3%B5es.md): Commands for setting up a development environment
- #### [Python Code](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/pipeline_etl.py): ETL Pipeline Code 
+ #### [Python Code](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/pipeline_etl.py): ETL Pipeline Code
 
 <div align="center">
 <img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Fluxograma.png?raw=true" /></a>
