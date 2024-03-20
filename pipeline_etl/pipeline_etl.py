@@ -120,6 +120,8 @@ def transformar(df):
     # Executa a consulta SQL que inclui a nova coluna, operando sobre a tabela virtual
     df_transformado = duckdb.sql("""SELECT
                                 CONCAT(codigo_viagem, '-', numero_bilhete, '-', numero_poltrona, '-', plataforma_embarque) AS codigo,
+                                data_emissao_bilhete,
+                                data_viagem,
                                 CAST(codigo_viagem AS VARCHAR) AS codigo_viagem,
                                 CAST(cnpj AS VARCHAR) AS cnpj,
                                 CAST(numero_bilhete AS VARCHAR) AS numero_bilhete,                  
