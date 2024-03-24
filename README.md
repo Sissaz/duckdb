@@ -8,6 +8,7 @@ This project represents a comprehensive pipeline for processing and storing data
 
  #### [First Installations](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/instru%C3%A7%C3%B5es.md): Commands for setting up a development environment
  #### [Python Code](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/pipeline_etl.py): ETL Pipeline Code
+#### [Dashboard Link](https://app.powerbi.com/view?r=eyJrIjoiM2ZmNDhkZTAtNDEzYy00Y2EyLTkwMDUtNmY2YTY4NDhiZjdkIiwidCI6IjE0Y2JkNWE3LWVjOTQtNDZiYS1iMzE0LWNjMGZjOTcyYTE2MSIsImMiOjh9): Análise de Desempenho de Vendas de Passagens
 
 <div align="center">
 <img width="50%" src="https://github.com/Sissaz/duckdb/blob/master/imagens/Fluxograma.png?raw=true" /></a>
