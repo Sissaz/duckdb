@@ -152,7 +152,6 @@ Adds the pandas library as a project dependency.
 • poetry add chardet
 
 Adds the chardet library as a project dependency.
-
 <br><br>
 
 ### Git Commands
