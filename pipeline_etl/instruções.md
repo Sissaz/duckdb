@@ -20,8 +20,13 @@ Downloads and executes the pyenv installation script for Windows.
 After downloading Git Bash, open it in the project's current directory.
 - code .
 
-For open Visual Studio Code in the folder of the project.
+To open Visual Studio Code in the project's folder
+
 <br>
+
+### In VSCode
+
+After opening VSCode, open the Git Bash terminal and type the following:
 
 - pyenv install 3.12.1
 
@@ -30,10 +35,6 @@ Installs Python version 3.12.1 using pyenv. This allows you to manage multiple P
 - pyenv local 3.12.1
 
 Sets Python 3.12.1 as the version for the current directory.
-
-<br>
-
-### In VSCode
 - curl -sSL https://install.python-poetry.org | python3 -
 
 Installs Poetry using the official script.
