@@ -99,7 +99,7 @@ Sets the global version of Python to 3.12.1 using pyenv.
 - poetry install --no-root
 
 Installs the project dependencies without installing the root package.
-<br>
+<br><br>
 
 ### Installing Python Libraries with Poetry
 - poetry add streamlit
