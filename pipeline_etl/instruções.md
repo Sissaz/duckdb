@@ -48,7 +48,7 @@ Verify the Poetry installation.
 <br>
 If needed, install Poetry using pip.
 
--python3 -m pip install poetry
+-pip install poetry
 
 <br>
 - poetry --version
@@ -59,6 +59,10 @@ Displays the installed version of Poetry.
 - poetry config virtualenvs.in-project true
 
 Configures Poetry to create virtual environments within the project.
+
+<br>
+- poetry new dados_csv 
+Create the project and name it as you like.
 
 <br>
 - poetry install
