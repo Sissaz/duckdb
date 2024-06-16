@@ -62,6 +62,7 @@ Configures Poetry to create virtual environments within the project.
 
 <br>
 - poetry new dados_csv 
+
 Create the project and name it as you like.
 
 <br>
