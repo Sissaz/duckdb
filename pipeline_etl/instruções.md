@@ -81,11 +81,6 @@ Starts a new project with Poetry, creating the pyproject.toml file.
 Activates the project's virtual environment.
 
 <br>
-- poetry new base
-
-Creates a new Poetry project named 'base'.
-
-<br>
 - pyenv local 3.12.1
 
 Sets the local version of Python to 3.12.1 using pyenv.
@@ -104,8 +99,9 @@ Sets the global version of Python to 3.12.1 using pyenv.
 - poetry install --no-root
 
 Installs the project dependencies without installing the root package.
-
 <br>
+
+### Installing Python Libraries with Poetry
 - poetry add streamlit
 
 Adds the Streamlit library as a project dependency.
