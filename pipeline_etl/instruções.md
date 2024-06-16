@@ -20,7 +20,7 @@ After downloading Git Bash, open it in the project's current directory.
 - code .
 
 To open Visual Studio Code in the project's folder
-<br>
+<br><br>
 
 ### In VSCode
 
