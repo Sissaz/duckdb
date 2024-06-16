@@ -2,6 +2,12 @@
 Commands for setting up a development environment: adjusting policies in PowerShell, installing pyenv, opening VSCode, using Poetry for dependency management and Python versions with pyenv, and Git commands for version control. Commands for pip and venv are mentioned but not used with Poetry.
 <br>
 
+I ran the following commands using Python in Visual Studio Code.
+
+https://www.python.org/
+https://code.visualstudio.com/
+
+
 ### In PowerShell
 
 After opening PowerShell, type the following:
@@ -16,7 +22,7 @@ Downloads and executes the pyenv installation script for Windows.
 
 ### In Bash
 
-After downloading Git Bash, open it in the project's current directory.
+After downloading Git Bash, open it in the project's current directory and type the following:
 • code .
 
 To open Visual Studio Code in the project's folder
