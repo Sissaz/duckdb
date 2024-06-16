@@ -114,6 +114,11 @@ Installs the project dependencies without installing the root package.
 Adds the Streamlit library as a project dependency.
 
 <br>
+• poetry add duckdb
+
+Adds the duckdb library as a project dependency.
+
+<br>
 • poetry add gdown
 
 Adds the gdown library as a project dependency.
@@ -148,7 +153,9 @@ Adds the pandas library as a project dependency.
 
 Adds the chardet library as a project dependency.
 
-<br>
+<br><br>
+
+### Git Commands
 • git add . or git add filename
 
 Adds all changes to the Git index.
