@@ -41,6 +41,16 @@ Sets Python 3.12.1 as the version for the current directory.
 Installs Poetry using the official script.
 
 <br>
+Verify the Poetry installation.
+
+- python3 -m poetry --version
+
+<br>
+If needed, install Poetry using pip.
+
+-python3 -m pip install poetry
+
+<br>
 - poetry --version
 
 Displays the installed version of Poetry.
