@@ -5,6 +5,7 @@ Commands for setting up a development environment: adjusting policies in PowerSh
 I ran the following commands using Python in Visual Studio Code.
 
 https://www.python.org/
+
 https://code.visualstudio.com/
 
 
