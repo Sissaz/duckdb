@@ -2,7 +2,7 @@
 
  #### [First Installations](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/instru%C3%A7%C3%B5es.md): Commands for setting up a development environment
  #### [Python Code](https://github.com/Sissaz/duckdb/blob/master/pipeline_etl/pipeline_etl.py): ETL Pipeline Code
- #### [Dashboard Link](https://app.powerbi.com/view?r=eyJrIjoiM2ZmNDhkZTAtNDEzYy00Y2EyLTkwMDUtNmY2YTY4NDhiZjdkIiwidCI6IjE0Y2JkNWE3LWVjOTQtNDZiYS1iMzE0LWNjMGZjOTcyYTE2MSIsImMiOjh9): Análise de Desempenho de Vendas de Passagens
+ #### [Dashboard Link](https://app.powerbi.com/view?r=eyJrIjoiYmY4MmRmN2YtMmViYS00ODkzLWFmN2UtMDk5ZjNmZWFkMjAzIiwidCI6IjFlYjVjZjY1LWJiMjUtNDlmYi1iZDNlLTIxNWQ4NDQ4YWZkNCJ9&pageName=ReportSection): Análise de Desempenho de Vendas de Passagens | PT-BR
 
  #### Code Explained:
 
