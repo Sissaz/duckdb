@@ -12,6 +12,7 @@ https://code.visualstudio.com/
 ### In PowerShell
 
 After opening PowerShell, type the following:
+
 • Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 Changes the execution policy of PowerShell to allow the execution of scripts.
@@ -24,6 +25,7 @@ Downloads and executes the pyenv installation script for Windows.
 ### In Bash
 
 After downloading Git Bash, open it in the project's current directory and type the following:
+
 • code .
 
 To open Visual Studio Code in the project's folder
