@@ -46,19 +46,9 @@ Installs Python version 3.12.1 using pyenv. This allows you to manage multiple P
 Sets Python 3.12.1 as the version for the current directory.
 
 <br>
-• curl -sSL https://install.python-poetry.org | python3 -
-
-Installs Poetry using the official script.
-
-<br>
-Verify the Poetry installation.
-
-• python3 -m poetry --version
-
-<br>
-If needed, install Poetry using pip.
-
 • pip install poetry
+
+Install Poetry using pip.
 
 <br>
 • poetry --version
@@ -71,19 +61,19 @@ Displays the installed version of Poetry.
 Configures Poetry to create virtual environments within the project.
 
 <br>
-• poetry new dados_csv 
+• poetry new exemplo_exemplo_x
 
-Create the project and name it as you like.
+If needed and not created yet, create the project and name it as you like.
+
+<br>
+• poetry init
+
+Initiates a new project with Poetry, generating the pyproject.toml file. During the process, you'll be prompted to provide some basic project information in the terminal. Simply answer the prompts and continue.
 
 <br>
 • poetry install
 
 After creating the project folder, open Git Bash in VSCode from within this folder. Then, run the command above to install the project dependencies specified in the pyproject.toml file
-
-<br>
-• poetry init
-
-Starts a new project with Poetry, creating the pyproject.toml file.
 
 <br>
 • poetry shell
